@@ -1,22 +1,18 @@
-//myanatomy
-
 class Solution {
     public int maxSubArray(int[] nums) {
- 
-        //Initialize both current and maximum sum
-        int currentSum = nums[0];
-        int maxSum=nums[0];
- 
-        //Traverse array from second element
-        for(int i =1; i<nums.length; i++){
- 
-            //Either start a new subarray
-            // or continue existing
-            currentSum= Math.max(nums[i], currentSum + nums[i]);
-            //Update global maximum
-            maxSum=Math.max(maxSum, currentSum);
-        }
+        int n=nums.length;
+        int maxEnding=nums[0];
+        int minEnding=nums[0];
+        int result=nums[0];
 
-        return maxSum;
+        for(int i=1;i<n;i++){
+            int v1=nums[i];
+            int v2=maxEnding+nums[i];
+            int v3=minEnding+nums[i];
+            maxEnding = Math.max(v1,Math.max(v2,v3));
+            minEnding = Math.min(v1,Math.min(v2,v3));
+            result=Math.max(result,Math.max(maxEnding,minEnding)); 
+        }
+        return result;
     }
 }
